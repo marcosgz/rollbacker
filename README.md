@@ -1,3 +1,7 @@
+# Note #
+  This project continues in development. Essential features to this project work will be in tomorrow's release.
+
+
 ## Rollbacker ##
 
 Rollbacker is a manage tool for auditing changes to your ActiveRecord.
