@@ -10,7 +10,7 @@ module Rollbacker
     end
 
     [:create, :update, :destroy].each do |action|
-      define_method("around_#{action}") do |model|
+      define_method("before_#{action}") do |model|
         rollback_model_changes(model, action)
       end
     end

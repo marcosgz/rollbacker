@@ -11,11 +11,11 @@ describe Rollbacker::DatabaseRollback do
   end
 
   [:create, :update, :destroy].each do |action|
-    it "should respond with around_#{action}" do
+    it "should respond with before_#{action}" do
       model = Model.new(name: 'name')
       config     = Rollbacker::Config.new(action)
       callback = Rollbacker::DatabaseRollback.new(config.options)
-      callback.should respond_to("around_#{action}")
+      callback.should respond_to("before_#{action}")
     end
   end
 
@@ -27,7 +27,7 @@ describe Rollbacker::DatabaseRollback do
 
     lambda {
       without_rollbacker do
-        callback.send :around_create, model
+        callback.send :before_create, model
       end
     }.should_not raise_exception(ActiveRecord::Rollback)
   end
@@ -39,7 +39,7 @@ describe Rollbacker::DatabaseRollback do
     callback = Rollbacker::DatabaseRollback.new(config.options)
 
     lambda {
-      callback.send :around_create, model
+      callback.send :before_create, model
     }.should raise_exception(ActiveRecord::Rollback)
   end
 end

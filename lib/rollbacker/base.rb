@@ -23,7 +23,7 @@ module Rollbacker
 
         config = Rollbacker::Config.new(*args)
         config.actions.each do |action|
-          send "around_#{action}", Rollbacker::DatabaseRollback.new(config.options)
+          send "before_#{action}", Rollbacker::DatabaseRollback.new(config.options)
           # send :after_rollback, Rollbacker::Recorder.new(action, config.options, &blk), :on => action
         end
         send :after_rollback, Rollbacker::Recorder.new(config.options, &blk)
